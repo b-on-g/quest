@@ -20,12 +20,13 @@ jobs:
             - uses: hyoo-ru/mam_build@master2
               with:
                   package: "bog/quest"
+                  modules: 'app'
 
 
             - uses: hyoo-ru/gh-deploy@v4.4.1
               if: github.ref == 'refs/heads/master'
               with:
-                  folder: "bog/quest/-"
+                  folder: "bog/quest/app/-"
 
             - name: Deploy feature branch
               if: startsWith(github.ref, 'refs/heads/feature/')
