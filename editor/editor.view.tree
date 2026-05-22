@@ -1,0 +1,81 @@
+$bog_quest_editor $mol_list
+	rows <= editor_rows /
+	Game_title $mol_string
+		hint @ \Название игры
+		value? <=> game_title? \
+	Game_author $mol_string
+		hint @ \Автор
+		value? <=> game_author? \
+	Game_description $mol_textarea
+		hint @ \Описание
+		value? <=> game_description? \
+	Cover_section $mol_row
+		sub <= cover_section /
+	Cover_preview $mol_image
+		uri <= cover_uri \
+	Cover_upload $mol_button_open
+		title @ \Загрузить обложку
+		files? <=> cover_files? /
+	Cover_remove $mol_button_minor
+		title @ \Удалить обложку
+		click? <=> cover_remove? null
+	Characters_header $mol_paragraph
+		title @ \Персонажи
+	Add_character $mol_button_minor
+		title @ \+ Персонаж
+		click? <=> add_character? null
+	Character_row* $mol_row
+		sub /
+			<= Character_name* $mol_string
+				hint @ \Имя
+				value? <=> character_name*? \
+			<= Character_color* $mol_string
+				hint @ \Цвет
+				value? <=> character_color*? \
+			<= Character_sprite_upload* $mol_button_open
+				title @ \Спрайт
+				files? <=> character_sprite_files*? /
+			<= Character_sprite_image* $mol_image
+				uri <= character_sprite_uri* \
+			<= Character_delete* $mol_button_minor
+				title @ \×
+				click? <=> character_delete*? null
+	Scenes_header $mol_paragraph
+		title @ \Сцены
+	Add_scene $mol_button_major
+		title @ \+ Сцена
+		click? <=> add_scene? null
+	Graph_link $mol_link
+		arg *
+			panel \graph
+		sub /
+			<= Graph_label @ \🕸 Граф сцен
+	Scene_row* $mol_row
+		sub /
+			<= Scene_link* $mol_link
+				arg *
+					scene <= scene_key* \
+				sub /
+					<= scene_title* \
+			<= Scene_start_label* $mol_view
+				sub /
+					<= scene_start_label* \
+			<= Scene_set_start* $mol_button_minor
+				title @ \Сделать стартовой
+				click? <=> scene_set_start*? null
+			<= Scene_delete* $mol_button_minor
+				title @ \×
+				click? <=> scene_delete*? null
+	No_game $mol_paragraph
+		title @ \Игра не найдена. Открой её из списка «Мои игры».
+	Back_link $mol_link
+		arg *
+			scene null
+			panel null
+		sub /
+			<= Back_label @ \← К списку сцен
+	Scene_editor $bog_quest_editor_scene
+		game_link <= game_link \
+		scene_key <= current_scene_key \
+	Graph_view $bog_quest_editor_graph
+		game_link <= game_link \

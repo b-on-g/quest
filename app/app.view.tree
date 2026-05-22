@@ -1,0 +1,28 @@
+$bog_quest_app $mol_page
+	title @ \quest
+	pages *
+		home <= Home $bog_quest_home
+		edit <= Editor $bog_quest_editor
+		play <= Player $bog_quest_player
+	nav_options *
+		home @ \Мои игры
+		edit @ \Редактор
+	Navbar $mol_switch
+		value? <=> screen? \home
+		options <= nav_options
+	tools /
+		<= Status $giper_baza_status
+		<= Theme_toggle $bog_theme_toggle
+			theme_auto <= Theme
+	head /
+		<= Title
+		<= Navbar
+		<= Tools
+	plugins /
+		<= Theme $bog_theme_auto
+			theme_light \$mol_theme_calm_light
+			theme_dark \$mol_theme_calm_dark
+			themes /
+				\$mol_theme_calm_light
+				\$mol_theme_calm_dark
+	body <= screen_body /

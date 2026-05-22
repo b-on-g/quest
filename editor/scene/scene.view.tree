@@ -1,0 +1,55 @@
+$bog_quest_editor_scene $mol_list
+	game_link \
+	scene_key \
+	rows <= scene_rows /
+	Scene_title $mol_string
+		hint @ \Название сцены
+		value? <=> scene_title? \
+	Bg_section $mol_row
+		sub <= bg_section /
+	Bg_preview $mol_image
+		uri <= bg_uri \
+	Bg_upload $mol_button_open
+		title @ \Загрузить фон
+		files? <=> bg_files? /
+	Bg_remove $mol_button_minor
+		title @ \Удалить фон
+		click? <=> bg_remove? null
+	Lines_header $mol_paragraph
+		title @ \Реплики
+	Add_line $mol_button_minor
+		title @ \+ Реплика
+		click? <=> add_line? null
+	Line_row* $mol_row
+		sub /
+			<= Line_character* $mol_select
+				value? <=> line_character*? \
+				dictionary <= character_options *
+			<= Line_position* $mol_select
+				value? <=> line_position*? \center
+				dictionary *
+					left @ \◀ слева
+					center @ \● центр
+					right @ \справа ▶
+			<= Line_text* $mol_textarea
+				hint @ \Текст реплики
+				value? <=> line_text*? \
+			<= Line_delete* $mol_button_minor
+				title @ \×
+				click? <=> line_delete*? null
+	Choices_header $mol_paragraph
+		title @ \Выборы (если нет — конец игры)
+	Add_choice $mol_button_minor
+		title @ \+ Выбор
+		click? <=> add_choice? null
+	Choice_row* $mol_row
+		sub /
+			<= Choice_text* $mol_string
+				hint @ \Текст выбора
+				value? <=> choice_text*? \
+			<= Choice_next* $mol_select
+				value? <=> choice_next*? \
+				dictionary <= scene_options *
+			<= Choice_delete* $mol_button_minor
+				title @ \×
+				click? <=> choice_delete*? null

@@ -1,0 +1,60 @@
+$bog_quest_editor_graph $mol_view
+	game_link \
+	dom_name \svg
+	attr *
+		viewBox <= viewbox \0 0 1200 800
+		xmlns \http://www.w3.org/2000/svg
+	sub <= graph_sub /
+	Edge* $mol_view
+		dom_name \line
+		attr *
+			x1 <= edge_x1* 0
+			y1 <= edge_y1* 0
+			x2 <= edge_x2* 0
+			y2 <= edge_y2* 0
+			stroke \#888
+			stroke-width 2
+			marker-end \url(#arrow)
+	Node_group* $mol_view
+		dom_name \g
+		attr *
+			transform <= node_transform* \translate(0 0)
+		event *
+			click? <=> node_click*? null
+		sub /
+			<= Node_rect* $mol_view
+				dom_name \rect
+				attr *
+					width 180
+					height 80
+					rx 8
+					fill \#1f2937
+					stroke <= node_stroke* \#444
+					stroke-width 2
+			<= Node_label* $mol_view
+				dom_name \text
+				attr *
+					x 90
+					y 44
+					text-anchor \middle
+					fill \#fff
+				sub /
+					<= node_label* \
+	Arrow_defs $mol_view
+		dom_name \defs
+		sub /
+			<= Arrow_marker $mol_view
+				dom_name \marker
+				attr *
+					id \arrow
+					markerWidth 10
+					markerHeight 10
+					refX 10
+					refY 5
+					orient \auto
+				sub /
+					<= Arrow_path $mol_view
+						dom_name \path
+						attr *
+							d \M0 0 L10 5 L0 10 z
+							fill \#888

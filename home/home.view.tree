@@ -1,0 +1,43 @@
+$bog_quest_home $mol_list
+	rows /
+		<= Title_text $mol_paragraph
+			title @ \Мои игры
+		<= Create_button $mol_button_major
+			title @ \+ Новая игра
+			click? <=> create_game? null
+		<= Games_list $mol_list
+			rows <= game_rows /
+		<= Saves_header $mol_paragraph
+			title @ \Прохождения
+		<= Saves_list $mol_list
+			rows <= save_rows /
+	Game_card* $mol_view
+		sub /
+			<= Game_title_label* $mol_paragraph
+				title <= game_title* \
+			<= Edit_link* $mol_link
+				arg *
+					screen \edit
+					game <= game_id* \
+				sub /
+					<= Edit_label @ \Редактировать
+			<= Share_link* $mol_button_minor
+				title @ \Скопировать ссылку
+				click? <=> share_game*? null
+			<= Delete_button* $mol_button_minor
+				title @ \×
+				click? <=> delete_game*? null
+	Save_card* $mol_view
+		sub /
+			<= Save_title_label* $mol_paragraph
+				title <= save_title* \
+			<= Continue_link* $mol_link
+				arg *
+					screen \play
+					author <= save_author* \
+					game <= save_game* \
+				sub /
+					<= Continue_label @ \Продолжить
+			<= Save_delete_button* $mol_button_minor
+				title @ \×
+				click? <=> delete_save*? null

@@ -1,0 +1,42 @@
+$bog_quest_player $mol_view
+	sub <= player_sub /
+	Stage $mol_view
+		style *
+			backgroundImage <= stage_bg \
+		sub /
+			<= Sprite_left $mol_image
+				uri <= sprite_uri_left \
+			<= Sprite_center $mol_image
+				uri <= sprite_uri_center \
+			<= Sprite_right $mol_image
+				uri <= sprite_uri_right \
+	Textbox $mol_view
+		event *
+			click? <=> advance? null
+		sub /
+			<= Speaker_name $mol_view
+				style *
+					color <= speaker_color \#ffffff
+				sub /
+					<= speaker_name \
+			<= Line_text $mol_view
+				sub /
+					<= current_text \
+			<= Hint $mol_view
+				sub /
+					<= hint_text @ \(клик чтобы продолжить)
+	Choices_panel $mol_list
+		rows <= choice_rows /
+	Choice_button* $mol_button_major
+		title <= choice_label* \
+		click? <=> pick_choice*? null
+	End_screen $mol_view
+		sub /
+			<= End_text @ \Конец
+			<= Restart_button $mol_button_major
+				title @ \Начать заново
+				click? <=> restart? null
+	Loading $mol_paragraph
+		title @ \Загрузка…
+	Not_found $mol_paragraph
+		title @ \Игра не найдена.
