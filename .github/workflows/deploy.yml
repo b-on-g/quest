@@ -21,13 +21,6 @@ jobs:
               with:
                   package: "bog/quest"
 
-            - uses: b-on-g/mol-prerender-action@main
-              if: github.ref == 'refs/heads/master'
-              with:
-                  folder: "bog/quest/-"
-                  base-url: "https://bog.github.io/quest/"
-                  screens: |
-                      home
 
             - uses: hyoo-ru/gh-deploy@v4.4.1
               if: github.ref == 'refs/heads/master'
